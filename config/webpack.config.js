@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-24 16:43:02
- * @LastEditTime: 2021-07-12 10:21:59
+ * @LastEditTime: 2021-10-11 15:25:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /tags/webpack/config/webpack.config.js
@@ -69,7 +69,7 @@ module.exports = (env, argv) => {
       path: paths.appBuild,
       clean: true
     },
-    devtool: isEnvDevelopment ? false : "eval-cheap-module-source-map",
+    devtool: isEnvProduction ? false : "eval-cheap-module-source-map",
     devServer: {
       contentBase: paths.appBuild,
       port: 9000,
