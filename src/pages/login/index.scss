@@ -1,0 +1,29 @@
+.head {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.loginForm {
+    margin: 50px auto;
+    max-width: 300px;
+    .ant-col-rtl {
+        .login-form-forgot {
+            float: left;
+        }
+    }
+    .login-form-forgot {
+        float: right;
+    }
+    .login-form-button {
+        width: 100%;
+    }
+}
+
+.registerForm {
+    padding: 5px 10px;
+    margin: 50px auto;
+    max-width: 400px;
+    .ant-form-item-label {
+        text-align: left;
+    }
+}
