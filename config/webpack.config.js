@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-24 16:43:02
- * @LastEditTime: 2021-10-11 15:25:42
+ * @LastEditTime: 2021-10-11 15:50:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /tags/webpack/config/webpack.config.js
@@ -14,6 +14,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; 
+const CompressionPlugin = require("compression-webpack-plugin");
 const paths = require('./paths');
 const { vendor } = require('postcss');
 
@@ -152,7 +153,15 @@ module.exports = (env, argv) => {
         filename: 'static/css/[name].[contenthash:8].css',
         chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
       }),
-      isEnvProduction && new BundleAnalyzerPlugin()
+      isEnvProduction && new BundleAnalyzerPlugin(),
+      // 开启gzip
+      new CompressionPlugin({
+        test: /\.(js|css|html)$/,
+        filename: "[path][base].gz[query]",
+        threshold: 1024,
+        minRatio: 0.7,
+        algorithm: "gzip",
+      })
     ].filter(Boolean),
     resolve: {
       extensions: paths.moduleFileExtensions
