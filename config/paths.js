@@ -1,24 +1,16 @@
 'use strict';
-const fs = require("fs")
-const path = require("path")
+const fs = require('fs');
+const path = require('path');
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 const buildPath = process.env.BUILD_PATH || 'dist';
 
-const moduleFileExtensions = [
-  'web.js',
-  'js',
-  'web.ts',
-  'ts',
-  'web.tsx',
-  'tsx',
-  'json',
-  'web.jsx',
-  'jsx',
-];
+const moduleFileExtensions = ['web.js', 'js', 'web.ts', 'ts', 'web.tsx', 'tsx', 'json', 'web.jsx', 'jsx'];
 
 module.exports = {
+  appDirectory,
+  resolveApp,
   appPath: resolveApp('.'),
   appBuild: resolveApp(buildPath),
   appPublic: resolveApp('public'),
@@ -33,6 +25,6 @@ module.exports = {
   // proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   // swSrc: resolveModule(resolveApp, 'src/service-worker'),
-}
+};
 
-module.exports.moduleFileExtensions = moduleFileExtensions
+module.exports.moduleFileExtensions = moduleFileExtensions;

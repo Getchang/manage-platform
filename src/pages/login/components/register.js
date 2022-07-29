@@ -1,12 +1,5 @@
-import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Select,
-  Checkbox,
-  Button,
-  AutoComplete,
-} from "antd";
+import React, { useState } from 'react';
+import { Form, Input, Select, Checkbox, Button, AutoComplete } from 'antd';
 const { Option } = Select;
 
 const formItemLayout = {
@@ -40,25 +33,25 @@ const tailFormItemLayout = {
   },
 };
 
-const RegistrationForm = (props) => {
+const RegistrationForm = props => {
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  const onFinish = values => {
+    console.log('Received values of form: ', values);
     const formData = new FormData();
-    formData.append("email", values.email);
-    formData.append("user_name", values.nickname);
-    formData.append("password", values.password);
-    formData.append("phone", values.phone);
-    fetch("http://localhost:3000/users/register", {
-      method: "POST",
+    formData.append('email', values.email);
+    formData.append('user_name', values.nickname);
+    formData.append('password', values.password);
+    formData.append('phone', values.phone);
+    fetch('http://localhost:3000/users/register', {
+      method: 'POST',
       body: formData,
     }).then(function (response) {
       return response.json();
     });
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
     // props.switchLoginType("login")
   };
   const prefixSelector = (
@@ -66,8 +59,7 @@ const RegistrationForm = (props) => {
       <Select
         style={{
           width: 70,
-        }}
-      >
+        }}>
         <Option value="86">+86</Option>
         <Option value="87">+87</Option>
       </Select>
@@ -75,20 +67,19 @@ const RegistrationForm = (props) => {
   );
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
-  const onEmailChange = (value) => {
+  const onEmailChange = value => {
     if (!value) {
       setAutoCompleteResult([]);
     } else {
-      setAutoCompleteResult(
-        ["@163.com", "@qq.com", "@gmail.com"].map((domain) => `${value}${domain}`)
-      );
+      setAutoCompleteResult(['@163.com', '@qq.com', '@gmail.com'].map(domain => `${value}${domain}`));
     }
   };
 
-  const emailOptions = autoCompleteResult.map((website) => ({
+  const emailOptions = autoCompleteResult.map(website => ({
     label: website,
     value: website,
   }));
+
   return (
     <Form
       {...formItemLayout}
@@ -98,29 +89,23 @@ const RegistrationForm = (props) => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       initialValues={{
-        prefix: "86",
+        prefix: '86',
       }}
-      scrollToFirstError
-    >
+      scrollToFirstError>
       <Form.Item
         name="email"
         label="E-mail"
         rules={[
           {
-            type: "email",
-            message: "The input is not valid E-mail!",
+            type: 'email',
+            message: 'The input is not valid E-mail!',
           },
           {
             required: true,
-            message: "Please input your E-mail!",
+            message: 'Please input your E-mail!',
           },
-        ]}
-      >
-        <AutoComplete
-          options={emailOptions}
-          onChange={onEmailChange}
-          placeholder="website"
-        >
+        ]}>
+        <AutoComplete options={emailOptions} onChange={onEmailChange} placeholder="website">
           <Input />
         </AutoComplete>
       </Form.Item>
@@ -131,37 +116,33 @@ const RegistrationForm = (props) => {
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: 'Please input your password!',
           },
         ]}
-        hasFeedback
-      >
+        hasFeedback>
         <Input.Password />
       </Form.Item>
 
       <Form.Item
         name="confirm"
         label="Confirm Password"
-        dependencies={["password"]}
+        dependencies={['password']}
         hasFeedback
         rules={[
           {
             required: true,
-            message: "Please confirm your password!",
+            message: 'Please confirm your password!',
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
-              if (!value || getFieldValue("password") === value) {
+              if (!value || getFieldValue('password') === value) {
                 return Promise.resolve();
               }
 
-              return Promise.reject(
-                new Error("The two passwords that you entered do not match!")
-              );
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
             },
           }),
-        ]}
-      >
+        ]}>
         <Input.Password />
       </Form.Item>
 
@@ -172,14 +153,12 @@ const RegistrationForm = (props) => {
         rules={[
           {
             required: true,
-            message: "Please input your nickname!",
+            message: 'Please input your nickname!',
             whitespace: true,
           },
-        ]}
-      >
+        ]}>
         <Input />
       </Form.Item>
-
 
       <Form.Item
         name="phone"
@@ -187,14 +166,13 @@ const RegistrationForm = (props) => {
         rules={[
           {
             required: true,
-            message: "Please input your phone number!",
+            message: 'Please input your phone number!',
           },
-        ]}
-      >
+        ]}>
         <Input
           addonBefore={prefixSelector}
           style={{
-            width: "100%",
+            width: '100%',
           }}
         />
       </Form.Item>
@@ -204,19 +182,15 @@ const RegistrationForm = (props) => {
         valuePropName="checked"
         rules={[
           {
-            validator: (_, value) =>
-              value
-                ? Promise.resolve()
-                : Promise.reject(new Error("Should accept agreement")),
+            validator: (_, value) => (value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement'))),
           },
         ]}
-        {...tailFormItemLayout}
-      >
+        {...tailFormItemLayout}>
         <Checkbox>
           I have read the <a href="">agreement</a>
         </Checkbox>
       </Form.Item>
-      <Form.Item {...tailFormItemLayout} >
+      <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
           Register
         </Button>
@@ -224,4 +198,4 @@ const RegistrationForm = (props) => {
     </Form>
   );
 };
-export default RegistrationForm
+export default RegistrationForm;
