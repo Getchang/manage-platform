@@ -1,13 +1,13 @@
-import { SWITCHLOGIN } from "./action_type"
+import { SWITCHLOGIN } from './action_type';
 
 const defaultState = {
-  swithLoginType: 'login'
-}
+  loginState: 'login',
+};
 export const loginData = (state = defaultState, action = {}) => {
-  switch(action.type) {
+  switch (action.type) {
     case SWITCHLOGIN:
-      return {...state, swithLoginType: action.loginType}
-    default: 
-      return {...state}
+      return { ...state, loginState: action.loginType };
+    default:
+      return { ...state };
   }
-}
+};

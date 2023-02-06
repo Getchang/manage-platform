@@ -84,7 +84,7 @@ const RegistrationForm = props => {
     <Form
       {...formItemLayout}
       form={form}
-      className="registerForm"
+      className="registerForm commonFrom"
       name="register"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -160,7 +160,7 @@ const RegistrationForm = props => {
         <Input />
       </Form.Item>
 
-      <Form.Item
+      {/* <Form.Item
         name="phone"
         label="Phone Number"
         rules={[
@@ -175,8 +175,8 @@ const RegistrationForm = props => {
             width: '100%',
           }}
         />
-      </Form.Item>
-
+      </Form.Item> */}
+      {/* 
       <Form.Item
         name="agreement"
         valuePropName="checked"
@@ -189,10 +189,17 @@ const RegistrationForm = props => {
         <Checkbox>
           I have read the <a href="">agreement</a>
         </Checkbox>
-      </Form.Item>
-      <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Register
+      </Form.Item> */}
+      <Form.Item {...tailFormItemLayout} className="operateBtn">
+        <Button
+          htmlType="button"
+          onClick={() => {
+            props.setLoginBoxType('login');
+          }}>
+          返回
+        </Button>
+        <Button type="primary" htmlType="submit" style={{ marginLeft: '10px' }}>
+          注册
         </Button>
       </Form.Item>
     </Form>

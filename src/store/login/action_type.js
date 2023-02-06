@@ -1,4 +1,4 @@
-// 切换登录注册
-const SWITCHLOGIN = 'SWITCH_LOGIN'
+// 切换登录状态
+const SWITCHLOGIN = 'SWITCH_LOGIN';
 
-export {SWITCHLOGIN}
+export { SWITCHLOGIN };

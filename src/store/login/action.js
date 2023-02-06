@@ -1,12 +1,10 @@
-import { SWITCHLOGIN } from "./action_type";
+import { SWITCHLOGIN } from './action_type';
 
-const switchLoginType = (loginType) => {
+const switchLoginState = loginType => {
   // console.log(loginType)
   return {
     type: SWITCHLOGIN,
-    loginType
-  }
-}
-export {
-  switchLoginType
-}
+    loginType,
+  };
+};
+export { switchLoginState };

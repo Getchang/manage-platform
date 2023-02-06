@@ -1,15 +1,32 @@
+.LoginBox{
+    height: 100%;
+    width: 100%;
+    color: #f8f8f8;
+    display: flow-root;
+    background: url(./image/1cD6Dm7VcgA.jpg);
+    background-size: 100% 100%;
+}
 .head {
+    font-size: 18px;
     text-align: center;
     margin: 20px auto;
 }
-
+.commonFrom{
+    padding: 25px;
+    background: rgba(255,255,255,.6);
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 15px rgba(255,255,255,.2);
+}
 .loginForm {
-    margin: 50px auto;
+    margin: 20vh auto;
     max-width: 300px;
     .ant-col-rtl {
         .login-form-forgot {
             float: left;
         }
+    }
+    .login-remember{
+        color: #f8f8f8;
     }
     .login-form-forgot {
         float: right;
@@ -25,5 +42,9 @@
     max-width: 400px;
     .ant-form-item-label {
         text-align: left;
+    }
+    .operateBtn{
+        display: flex;
+        justify-content: space-between;
     }
 }

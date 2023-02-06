@@ -67,7 +67,7 @@ module.exports = (env, argv) => {
       chunkFilename: 'static/js/[name].[chunkhash:8].js',
       path: paths.appBuild,
       clean: true,
-      publicPath: '/',
+      publicPath: !isEnvProduction ? '/' : '/manage/',
       assetModuleFilename: 'static/images/[hash][ext][query]',
     },
     devtool: isEnvProduction ? false : 'eval-cheap-module-source-map',

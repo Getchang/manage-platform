@@ -1,82 +1,73 @@
-import React, { Component, Fragment } from "react";
-import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import React, { Component, Fragment } from 'react';
+import { Form, Input, Button, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-export default class LoginBox extends Component{
-  constructor() {
-    super();
-  }
-  onFinish = (values) => {
-    console.log("Success:", values);
-    const formData = new FormData();
-    formData.append("user_name", values.username);
-    formData.append("password", values.password);
-    // fetch("http://localhost:3000/users/register", {
-    //   method: "POST",
-    //   body: formData,
-    // }).then(function (response) {
-    //   return response.json();
-    // });
-  };
+/**
+ * @description: 登录提交表单
+ * @param {*} values
+ * @return {*}
+ */
+const onFinish = values => {
+  console.log('Success:', values);
+  const formData = new FormData();
+  formData.append('user_name', values.username);
+  formData.append('password', values.password);
+  // fetch("http://localhost:3000/users/register", {
+  //   method: "POST",
+  //   body: formData,
+  // }).then(function (response) {
+  //   return response.json();
+  // });
+};
 
-  onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-  render() {
-    return (
-      <Form
-          name="basic"
-          className="loginForm"
-        //   wrapperCol={{
-        //     offset: 6,
-        //     span: 10,
-        //   }}
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={this.onFinish}
-          onFinishFailed={this.onFinishFailed}
-        >
-          <Form.Item
-            name="username"
-            rules={[{ required: true, message: "Please input your Username!" }]}
-          >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: "Please input your Password!" }]}
-          >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Item>
-          <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
+/**
+ * @description: 登录验证未通过
+ * @param {*} errorInfo
+ * @return {*}
+ */
+const onFinishFailed = errorInfo => {
+  console.log('Failed:', errorInfo);
+};
 
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
-          </Form.Item>
+const LoginBox = props => {
+  return (
+    <Form
+      name="basic"
+      className="loginForm commonFrom"
+      initialValues={{
+        remember: true,
+      }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}>
+      <Form.Item name="username" rules={[{ required: true, message: '请输入用户名!' }]}>
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名" />
+      </Form.Item>
+      <Form.Item name="password" rules={[{ required: true, message: '请输入密码!' }]}>
+        <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="密码" />
+      </Form.Item>
+      <Form.Item>
+        <Form.Item name="remember" valuePropName="checked" noStyle>
+          <Checkbox className="login-remember">记住我</Checkbox>
+        </Form.Item>
 
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
-              Log in
-            </Button>
-            Or <a onClick={() => {this.props.switchLoginType('register')}}>register now!</a>
-          </Form.Item>
-        </Form>
-    )
-  }
-}
+        <a className="login-form-forgot" href="">
+          忘记密码
+        </a>
+      </Form.Item>
+
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          登录
+        </Button>
+        Or{' '}
+        <a
+          onClick={() => {
+            props.setLoginBoxType('register');
+          }}>
+          register now!
+        </a>
+      </Form.Item>
+    </Form>
+  );
+};
+export default LoginBox;
